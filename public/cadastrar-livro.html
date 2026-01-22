@@ -115,6 +115,11 @@
                                 <input name="precoVenda" id="precoVenda" maxlength="20" type="Text"></input>
                             </label>
 
+                            <label>
+                                Quantidade de livros:
+                                <br>
+                                <input nome="quantidade" id="quantidade" type="text">
+                            </label>
 
                             <button>Cadastrar</button>
                         </form>
@@ -146,23 +151,27 @@
             fkGenero: form_postagem.fkGenero_lista.value,
             fkAutor: form_postagem.fkAutor_lista.value,
             precoCompra: form_postagem.precoCompra.value,
-            precoVenda: form_postagem.precoVenda.value
+            precoVenda: form_postagem.precoVenda.value,
+            quantidade: form_postagem.quantidade.value
         }
 
-        if (corpo.precoCompra >= 100 && corpo.fkGenero == '3' || corpo.fkGenero == 2){
+        if (corpo.precoCompra >= 100 && corpo.fkGenero ==  1|| corpo.fkGenero == 2){
             var vender = (corpo.precoCompra * 1.225).toFixed(2);
-            corpo.precoVenda = vender
-            form_postagem.precoVenda.value = vender
+            
+            alert(`O valor está incorreto, deveria ser R$${vender}`)
+            return false
 
-        } else if (corpo.precoCompra <= 50 && corpo.fkGenero == 5 || corpo.fkGenero == 3){
+        } else if (corpo.precoCompra <= 50 && corpo.fkGenero == 3 || corpo.fkGenero == 1){
             var vender = (corpo.precoCompra * 1.25).toFixed(2);
-            corpo.precoVenda = vender
-            form_postagem.precoVenda.value = vender
 
-        } else if (corpo.precoCompra >= 50 && corpo.precoCompra < 100 && corpo.fkGenero == 6){
+            alert(`O valor está incorreto, deveria ser R$${vender}`)
+            return false
+
+        } else if (corpo.precoCompra >= 50 && corpo.precoCompra < 100 && corpo.fkGenero == 4){
             var vender = (corpo.precoCompra * 1.227).toFixed(2);
-            corpo.precoVenda = vender
-            form_postagem.precoVenda.value = vender
+            
+            alert(`O valor está incorreto, deveria ser R$${vender}`)
+            return false
         }
 
         fetch(`/livros/cadastrar`, {
